@@ -1,0 +1,16 @@
+{
+    "name": "tetris",
+    "version": "1.0.0",
+    "description": "UI Program for Tetris Arcade Machine",
+    "main": "app.js",
+    "scripts": {
+        "test": "electron .",
+        "pack-linux": "npx electron-packager ./out tetris --platform=linux --arch=arm64 --overwrite"
+    },
+    "author": "Christoph Koschel",
+    "license": "MIT",
+    "dependencies": {
+        "@electron/packager": "^18.1.0",
+        "electron": "^27.1.3"
+    }
+}

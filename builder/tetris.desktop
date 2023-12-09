@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Tetris
+Type=Application
+Exec=sh /home/{{USERNAME}}/app/tetris.sh
+Terminal=true
