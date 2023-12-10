@@ -17,10 +17,14 @@ This project the main repositroy for a Projectwork called Tetris Arcade Machine.
 - [sshpass](https://sourceforge.net/projects/sshpass/) - _thesun_ [Unknown/None] \
   For running ssh using the mode referred to as "keyboard-interactive" password authentication, but in non-interactive
   mode
+- [electron](https://www.electronjs.org/) - [MIT] \
+  Framework for creating desktop applications with Web-Languages
+- [electron-packager](https://github.com/electron/packager) - [BSD-2-Clause License] \
+  For packaging electron application into an OS-specific format
 
 ## Building
 
-Here is a step-by-step guide to building the demo version:
+Here is a step-by-step guide to building the project:
 
 1. Download and install the [NodeJS Runtime](https://nodejs.org/en). At least the version 18.18.0 must be used.
 2. Download the source code
