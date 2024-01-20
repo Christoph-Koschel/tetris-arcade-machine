@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Kanit-Regular;
+    src: url("../fonts/Kanit-Regular.ttf");
+}
+
+* {
+    user-select: none;
+    /*cursor: none;*/
+    font-family: Kanit-Regular, "Segoe UI Variable", system-ui;
+}
+
+body {
+    background: black;
+}

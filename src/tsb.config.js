@@ -5,15 +5,23 @@ builder.add_module("app", [
     "./main"
 ]).add_loader("./main/app.ts");
 
+builder.add_module("serial", [
+    "./driver"
+]);
+
 builder.add_module("renderer", [
     "./renderer"
-]).add_loader("./renderer/loader.ts");
+])
+    .dependence("serial")
+    .add_loader("./renderer/loader.ts");
 
 builder.create_build_queue("all")
     .compile_module("app")
+    .compile_module("serial")
     .compile_module("renderer")
     .copy("./index.html", "./out", true)
     .copy("./package.json", "./out", true)
+    .copy("./assets", "./out")
     .done();
 
 exports.default = builder.build();

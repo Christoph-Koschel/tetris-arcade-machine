@@ -1,0 +1,27 @@
+#main-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../background/background.png");
+}
+
+#main-menu img {
+    position: absolute;
+    top: 50px;
+    left: 3rem;
+    width: auto;
+    height: auto;
+}
+
+#main-menu .panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 300px 0 0 3rem;
+    min-width: 250px;
+}

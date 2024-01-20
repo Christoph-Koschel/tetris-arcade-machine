@@ -1,0 +1,22 @@
+#single-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../background/background.png");
+    display: flex;
+    flex-direction: row;
+}
+
+#single-player canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 900px;
+    width: 500px;
+    background: rgba(0,0,0,0.25);
+    padding: 10px;
+    /*border-radius: 1.75rem;*/
+}

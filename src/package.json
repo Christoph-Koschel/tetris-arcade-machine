@@ -4,7 +4,7 @@
     "description": "UI Program for Tetris Arcade Machine",
     "main": "app.js",
     "scripts": {
-        "test": "electron .",
+        "test": "tsb build && electron ./out/app.js",
         "pack-linux": "npx electron-packager ./out tetris --platform=linux --arch=arm64 --overwrite"
     },
     "author": "Christoph Koschel",

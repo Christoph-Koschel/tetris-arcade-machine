@@ -22,6 +22,13 @@ This project the main repositroy for a Projectwork called Tetris Arcade Machine.
 - [electron-packager](https://github.com/electron/packager) - [BSD-2-Clause License] \
   For packaging electron application into an OS-specific format
 
+Also some assets are from external source:
+
+- `src/assets/fonts/*` - [Google Fonts](https://fonts.google.com/)
+- `src/assets/background/background.png` - Adobe Firefly
+- `src/assets/sprites/logo.png` - [tetris.com](https://tetris.com)
+- `src/sfx/theme.mp3` - [SoundHub](https://www.youtube.com/watch?v=63hoSNvS6Z4&ab_channel=SoundHub)
+
 ## Building
 
 Here is a step-by-step guide to building the project:
