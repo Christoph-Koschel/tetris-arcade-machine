@@ -59,7 +59,7 @@ async function load(): Promise<void> {
     });
 
     write("Load sound");
-    sound.playSong("./assets/sfx/theme.mp3");
+    //sound.playSong("./assets/sfx/theme.mp3");
 
     write("Load sprites");
     await Promise.all((<(keyof Sprite)[]>Object.keys(Sprite)).map(key => spriteManager.load(path.join(__dirname, "assets", "sprites", Sprite[key]))))

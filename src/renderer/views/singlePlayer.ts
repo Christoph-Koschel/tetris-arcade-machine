@@ -10,7 +10,7 @@
  */
 import {View} from "../view";
 import controller from "../playerController";
-import {Cube, Game, Rect, Text} from "../game/rendering";
+import {Cube, Game, Rect, RenderLayers, Text} from "../game/rendering";
 import {BOARD_X, BOARD_Y, CELL_COUNT_X, CELL_COUNT_Y, CELL_SIZE, SCREEN_HEIGHT, SCREEN_WIDTH} from "../game/constants";
 import {BoardPoint, pointOf, sizeOf, virtualOf} from "../game/math";
 import {GAME_OBJECTS, GameObject} from "../game/objects";
@@ -119,8 +119,11 @@ class SinglePlayerGame implements Game {
 
     private isEnabled: boolean;
 
-    public start(ctx: CanvasRenderingContext2D): void {
+    private sealedRenderFlag: boolean;
+
+    public start(layers: RenderLayers): void {
         this.isEnabled = false;
+        this.sealedRenderFlag = false;
 
         // Init KeyEvents
         Keymap.on(KeyBoardConPress.KEY_A, () => {
@@ -195,14 +198,22 @@ class SinglePlayerGame implements Game {
         this.combo = 0;
         this.cleared = 0;
         this.needToClear = 5;
-        // this.resetSpeedInterval();
+
+        // Draw basic grid
+        this.grid.forEach(row => row.forEach(cell => cell.draw(layers.grid)));
+
+        // Start game
+        this.resetSpeedInterval();
     }
 
-    public loop(ctx: CanvasRenderingContext2D): void {
-        ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        this.grid.forEach(row => row.forEach(cell => cell.draw(ctx)));
-        this.buffered.forEach(cell => cell.draw(ctx));
-        this.movable.draw(ctx);
+    public loop(layers: RenderLayers): void {
+        layers.movable.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        if (this.sealedRenderFlag) {
+            layers.sealed.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            this.buffered.forEach(cell => cell.draw(layers.sealed));
+            this.sealedRenderFlag = false;
+        }
+        this.movable.draw(layers.movable);
     }
 
     public enable(): void {
@@ -338,6 +349,10 @@ class SinglePlayerGame implements Game {
             this.movable = this.nextMovable;
             this.moveRandom();
             this.nextMovable = this.newGameObject();
+
+            // Trigger sealed layer rendering
+            this.sealedRenderFlag = true;
+
             // Check for GameOver
             if (this.sealed[0].reduce((a: number, b: number) => a + b) != 0 || this.sealed[1].reduce((a: number, b: number) => a + b) != 0) {
                 clearInterval(this.speedLoop);
@@ -348,13 +363,14 @@ class SinglePlayerGame implements Game {
 
         return true;
     }
-
 }
 
 new (class _ extends View {
     private root: HTMLElement;
-    private canvas: HTMLCanvasElement;
-    private ctx: CanvasRenderingContext2D;
+    private grid: HTMLCanvasElement;
+    private movable: HTMLCanvasElement;
+    private sealed: HTMLCanvasElement;
+    private layers: RenderLayers;
     private game: SinglePlayerGame;
     private isPlaying: boolean;
 
@@ -363,14 +379,29 @@ new (class _ extends View {
 
         this.root = document.createElement("div");
         this.root.id = "single-player";
-        this.canvas = document.createElement("canvas");
-        this.canvas.height = 900;
-        this.canvas.width = 500;
-        this.ctx = this.canvas.getContext("2d");
-        this.game = new SinglePlayerGame();
-        this.game.start(this.ctx);
+        this.grid = document.createElement("canvas");
+        this.grid.height = 900;
+        this.grid.width = 500;
 
-        this.root.appendChild(this.canvas);
+        this.movable = document.createElement("canvas");
+        this.movable.height = 900;
+        this.movable.width = 500;
+
+        this.sealed = document.createElement("canvas");
+        this.sealed.height = 900;
+        this.sealed.width = 500;
+
+        this.layers = {
+            grid: this.grid.getContext("2d"),
+            movable: this.movable.getContext("2d"),
+            sealed: this.sealed.getContext("2d")
+        };
+
+        this.game = new SinglePlayerGame();
+        this.game.start(this.layers);
+        this.root.appendChild(this.grid);
+        this.root.appendChild(this.movable);
+        this.root.appendChild(this.sealed);
     }
 
     public onAppend(root: HTMLElement): void {
@@ -380,7 +411,7 @@ new (class _ extends View {
         this.isPlaying = true;
 
         const looper: FrameRequestCallback = () => {
-            this.game.loop(this.ctx);
+            this.game.loop(this.layers);
 
             if (this.isPlaying) {
                 window.requestAnimationFrame(looper);

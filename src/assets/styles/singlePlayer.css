@@ -16,7 +16,10 @@
     transform: translate(-50%, -50%);
     height: 900px;
     width: 500px;
-    background: rgba(0,0,0,0.25);
     padding: 10px;
     /*border-radius: 1.75rem;*/
+}
+
+#single-player canvas:first-child {
+    background: rgba(0, 0, 0, 0.25);
 }

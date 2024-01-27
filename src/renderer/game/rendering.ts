@@ -19,6 +19,13 @@ import spriteManager from "./spriteManager";
  */
 export type Render = CanvasRenderingContext2D;
 
+
+export type RenderLayers = {
+    grid: Render;
+    movable: Render;
+    sealed: Render;
+}
+
 /**
  * Game definition for the loader.
  * @interface
@@ -26,19 +33,19 @@ export type Render = CanvasRenderingContext2D;
 export interface Game {
     /**
      * Is called once when the game is loading.
-     * @param {Render} ctx - The rendering context.
+     * @param {RenderLayers} layers - The rendering context.
      * @public
      * @returns {void}
      */
-    start(ctx: Render): void;
+    start(layers: RenderLayers): void;
 
     /**
      * Is called on any render frame defined by {@link window.requestAnimationFrame}.
-     * @param {Render} ctx - The rendering context.
+     * @param {RenderLayers} layers - The rendering context.
      * @public
      * @returns {void}
      */
-    loop(ctx: Render): void;
+    loop(layers: RenderLayers): void;
 }
 
 /**
