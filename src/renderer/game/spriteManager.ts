@@ -8,6 +8,11 @@
  * You should have received a copy of the MIT license
  * along with this file. If not, please visit https://github.com/Christoph-Koschel/tetris-arcade-machine.
  */
+
+/**
+ * SpriteManager is for loading sprites at the beginning of the game. All sprites need to be loaded once.
+ * @class
+ */
 class SpriteManager {
     private sprites: Map<string, HTMLImageElement>;
 
@@ -15,6 +20,10 @@ class SpriteManager {
         this.sprites = new Map<string, HTMLImageElement>();
     }
 
+    /**
+     * Load a new sprite
+     * @param path - The path where the sprite is located
+     */
     public load(path: string): Promise<void> {
         return new Promise(resolve => {
             if (this.sprites.has(path)) {
@@ -31,6 +40,10 @@ class SpriteManager {
         });
     }
 
+    /**
+     * Get a loaded sprite
+     * @param path - The path where the sprite is located
+     */
     public get(path: string): HTMLImageElement {
         return this.sprites.get(path);
     }

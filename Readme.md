@@ -6,14 +6,13 @@ This project the main repositroy for a Projectwork called Tetris Arcade Machine.
 
 - TypeScript
 - HTML
+- CSS
 - Bash
 
 ## Libraries / Frameworks
 
 - [tsb](https://github.com/Christoph-Koschel/tsb) - _Christoph Koschel_ [GPL-3.0] \
   For parsing and bundling TypeScript into a browser-friendly JavaScript environment.
-- [crontab](https://github.com/cronie-crond/cronie) [ISC, GPL-2.0, LGPL-2.1] \
-  For running specified programs at scheduled times
 - [sshpass](https://sourceforge.net/projects/sshpass/) - _thesun_ [Unknown/None] \
   For running ssh using the mode referred to as "keyboard-interactive" password authentication, but in non-interactive
   mode
@@ -21,19 +20,20 @@ This project the main repositroy for a Projectwork called Tetris Arcade Machine.
   Framework for creating desktop applications with Web-Languages
 - [electron-packager](https://github.com/electron/packager) - [BSD-2-Clause License] \
   For packaging electron application into an OS-specific format
+- [serialport](https://github.com/electron/packager) - [MIT] \
+  A JavaScript package for reading and writing serial ports
 
-Also some assets are from external source:
+Also, some assets are from external source:
 
 - `src/assets/fonts/*` - [Google Fonts](https://fonts.google.com/)
 - `src/assets/background/background.png` - Adobe Firefly
 - `src/assets/sprites/logo.png` - [tetris.com](https://tetris.com)
-- `src/sfx/theme.mp3` - [SoundHub](https://www.youtube.com/watch?v=63hoSNvS6Z4&ab_channel=SoundHub)
 
 ## Building
 
 Here is a step-by-step guide to building the project:
 
-1. Download and install the [NodeJS Runtime](https://nodejs.org/en). At least the version 18.18.0 must be used.
+1. Download and install the [NodeJS Runtime](https://nodejs.org/en). At least the version 18.18.x must be used.
 2. Download the source code
    via. git
    ```shell

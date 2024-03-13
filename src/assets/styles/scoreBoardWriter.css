@@ -1,0 +1,42 @@
+#scoreboard-writer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../background/background.png");
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#scoreboard-writer > div > div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-direction: row;
+}
+
+#scoreboard-writer > div > div:first-of-type .selectable {
+    height: 50px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border-radius: 0;
+    border-bottom: 10px solid white;
+}
+
+#scoreboard-writer > div > div:first-of-type .selectable.active {
+    border: 0;
+    border-bottom: 10px solid darkkhaki;
+}
+
+
+#scoreboard-writer > div > div:last-child {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: flex-end;
+}

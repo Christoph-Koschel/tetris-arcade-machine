@@ -11,14 +11,22 @@
 import {Selectable} from "./selectable";
 import {Group} from "../group";
 
+/**
+ * Component class for creating a selection group
+ * @class
+ */
 export class Option<T> {
     private items: T[];
     private currentIndex: number;
     public root: HTMLElement;
+
     private previous: Selectable;
     private span: HTMLElement;
     private next: Selectable;
 
+    /**
+     * Returns the current selected option
+     */
     public get current(): T {
         return this.items[this.currentIndex];
     }

@@ -2,14 +2,6 @@
 
 SCRIPT_DIR=$(dirname $0)
 
-echo "Check crontab"
-cron_entry="@reboot sh /home/{{USERNAME}}/app/tetris.sh"
-
-if ! crontab -l | grep -q "$cron_entry"; then
-    echo "Add crontab"
-    { crontab -l; echo "$cron_entry"; } | crontab -
-fi
-
 echo "Overwrite autostart"
 sudo cp "$SCRIPT_DIR/tetris.desktop" /etc/xdg/autostart/tetris.desktop
 

@@ -8,6 +8,11 @@
  * You should have received a copy of the MIT license
  * along with this file. If not, please visit https://github.com/Christoph-Koschel/tetris-arcade-machine.
  */
+
+/*
+This file defines the group functions which are for the navigation with the driver.
+ */
+
 const groupCount: Map<string, number> = new Map<string, number>();
 
 export function getHighest(group: string): number {
@@ -25,4 +30,4 @@ export function getGroup(group: string): number {
     return groupCount.get(group);
 }
 
-export type Group = "__main__" | "__preSinglePlayer__";
+export type Group = "main" | "preSinglePlayer" | "preMultiPlayer" | "scoreBoardWriter" | "winBoard";

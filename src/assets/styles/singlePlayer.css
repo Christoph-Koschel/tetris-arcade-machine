@@ -9,17 +9,47 @@
     flex-direction: row;
 }
 
-#single-player canvas {
+#single-player > canvas {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: 900px;
     width: 500px;
-    padding: 10px;
-    /*border-radius: 1.75rem;*/
 }
 
-#single-player canvas:first-child {
+#single-player > div {
+    height: 900px;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 10px;
+    transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.25);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+#single-player > div > div {
+    height: 150px;
+    width: 200px;
+    position: absolute;
+    left: 100%;
+    transform: translate(0, -10px);
+    background: rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+#single-player > div > div > h3 {
+    color: #FFF;
+    font-family: Consolas, monospace;
+}
+
+#single-player > div > div > canvas {
+    position: absolute;
+    bottom: 10px;
 }

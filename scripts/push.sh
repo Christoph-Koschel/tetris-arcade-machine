@@ -1,5 +1,6 @@
 read -p "Enter the raspi ip: " IP
 read -s -p "Enter raspi password: " PASSWORD
+echo "*"
 
 source $(dirname $0)/config.sh
 

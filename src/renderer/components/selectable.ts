@@ -9,9 +9,12 @@
  * along with this file. If not, please visit https://github.com/Christoph-Koschel/tetris-arcade-machine.
  */
 
-import {getGroup, Group, incGroup} from "../group";
+import {getGroup, incGroup, Group} from "../group";
 import {ControllerClick, ControllerSelect, ControllerUnSelect} from "../playerController";
 
+/**
+ * Component class for creating a clickable UI-Elements.
+ */
 export class Selectable {
     public root: HTMLElement
     private onClick: Function;
@@ -38,6 +41,10 @@ export class Selectable {
         });
     }
 
+    /**
+     * Sets the click function that is triggered when the selectable got "clicked" by the driver.
+     * @param cb {Function}
+     */
     public setOnClick(cb: Function): void {
         this.onClick = cb;
     }

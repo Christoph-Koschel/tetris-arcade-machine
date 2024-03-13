@@ -1,13 +1,17 @@
 .selectable {
     display: block;
     padding: 0.8rem;
-    background: rgb(15, 143, 168);
+    background: #1b9ed1;
     color: white;
+    margin: 5px;
+    border-bottom-left-radius: 1.75rem;
+    border-top-right-radius: 1.75rem;
 }
 
 .selectable.active {
-    background: rgb(12, 118, 136);
-    border: 6px solid darkkhaki;
+    background: #1b9ed1;
+    border: 5px solid darkkhaki;
+    margin: 0;
 }
 
 .option {

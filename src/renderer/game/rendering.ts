@@ -10,42 +10,23 @@
  */
 import {Point, TransformBox, VirtualPoint} from "./math";
 import {CELL_SIZE} from "./constants";
-import * as path from "path";
-import spriteManager from "./spriteManager";
 
 /**
- * Type alias to shorthand the CanvasRenderingContext2D type
+ * Type alias to shorthand the CanvasRenderingContext2D type.
  * @type {Render}
  */
 export type Render = CanvasRenderingContext2D;
 
 
+/**
+ * Type alias representing all layer on that can be drawn.
+ */
 export type RenderLayers = {
     grid: Render;
     movable: Render;
     sealed: Render;
-}
-
-/**
- * Game definition for the loader.
- * @interface
- */
-export interface Game {
-    /**
-     * Is called once when the game is loading.
-     * @param {RenderLayers} layers - The rendering context.
-     * @public
-     * @returns {void}
-     */
-    start(layers: RenderLayers): void;
-
-    /**
-     * Is called on any render frame defined by {@link window.requestAnimationFrame}.
-     * @param {RenderLayers} layers - The rendering context.
-     * @public
-     * @returns {void}
-     */
-    loop(layers: RenderLayers): void;
+    previewGrid: Render;
+    preview: Render;
 }
 
 /**
@@ -158,13 +139,19 @@ export class Rect extends RenderObject {
     }
 }
 
+/**
+ * Representing filenames of the sprites in an enum.
+ * @enum
+ */
 export enum Sprite {
     RED = "red.png",
     BLUE = "blue.png",
     GREEN = "green.png",
     YELLOW = "yellow.png",
     DARKBLUE = "darkblue.png",
-    PINK = "pink.png"
+    PINK = "pink.png",
+    ORANGE = "orange.png",
+    GRAY = "gray.png"
 }
 
 /**

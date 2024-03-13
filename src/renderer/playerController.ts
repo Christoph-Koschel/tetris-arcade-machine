@@ -10,6 +10,11 @@
  */
 import {getHighest, Group} from "./group";
 
+/**
+ * Class for navigating registering elements into a group.
+ * Also includes some helper function to navigation between them.
+ * @class
+ */
 class PlayerController {
     private activeGroup: Group;
     private activeIndex: number;
@@ -21,11 +26,25 @@ class PlayerController {
         this.isEnabled = true;
     }
 
-    public isNull(): boolean {
-        return this.activeIndex == -1 || this.activeGroup == null;
+    /**
+     * Unselects the current selected element.
+     * @return {void}
+     */
+    public unselect(): void {
+        let element: Element = document.querySelector(`[data-group='${this.activeGroup}'][data-index='${this.activeIndex}']`);
+        if (!!element) {
+            element.dispatchEvent(new ControllerUnSelect());
+        }
     }
 
+    /**
+     * Sets the active group.
+     * @param group
+     * @return {void}
+     */
     public setGroup(group: Group): void {
+        this.unselect();
+
         this.activeGroup = group;
         this.activeIndex = -1;
         this.next(true);
@@ -39,6 +58,11 @@ class PlayerController {
         this.isEnabled = false;
     }
 
+    /**
+     * Selects the next element in the group.
+     * @param noUnselect
+     * @return {void}
+     */
     public next(noUnselect: boolean = false): void {
         if (!this.isEnabled) {
             return;
@@ -65,6 +89,10 @@ class PlayerController {
         element.dispatchEvent(new ControllerSelect());
     }
 
+    /**
+     * Selects the previous element in the group
+     * @return {void}
+     */
     public previous(): void {
         if (!this.isEnabled) {
             return;
@@ -88,6 +116,10 @@ class PlayerController {
         element.dispatchEvent(new ControllerSelect());
     }
 
+    /**
+     * Triggers the Click event on current selected element.
+     * @return {void}
+     */
     public click(): void {
         if (!this.isEnabled) {
             return;
@@ -101,6 +133,10 @@ class PlayerController {
     }
 }
 
+/**
+ * Custom Event when a selectable is selected
+ * @class
+ */
 export class ControllerSelect extends Event {
     public static logicalName: string = "controller.select";
 
@@ -109,6 +145,11 @@ export class ControllerSelect extends Event {
     }
 }
 
+
+/**
+ * Custom Event when a selectable is unselected
+ * @class
+ */
 export class ControllerUnSelect extends Event {
     public static logicalName: string = "controller.unselect";
 
@@ -117,6 +158,10 @@ export class ControllerUnSelect extends Event {
     }
 }
 
+/**
+ * Custom Event when a selectable is "clicked"
+ * @class
+ */
 export class ControllerClick extends Event {
     public static logicalName: string = "controller.click";
 

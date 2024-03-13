@@ -1,0 +1,22 @@
+#pre-multi-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../background/background.png");
+    display: flex;
+    flex-direction: row;
+}
+
+#pre-multi-player .panel {
+    width: 50%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+#pre-multi-player .panel .selectable {
+    width: 200px;
+}

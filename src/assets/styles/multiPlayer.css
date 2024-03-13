@@ -1,0 +1,34 @@
+#multi-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../background/background.png");
+    display: flex;
+    flex-direction: row;
+}
+
+
+#multi-player > div {
+    width: 50%;
+    height: 100%;
+}
+
+#multi-player > div:first-child > canvas {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    height: 900px;
+    width: 500px;
+}
+
+#multi-player > div:last-child > canvas {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    height: 900px;
+    width: 500px;
+}

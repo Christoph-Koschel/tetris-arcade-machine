@@ -17,6 +17,9 @@ sed -i "s/{{USERNAME}}/$USERNAME/" ./out/build.sh
 cd ./src
 npm run pack-linux
 cd ..
+cd ./src/tetris-linux-arm64/resources/app
+npm install --production
+cd ../../../../
 
 cp -r ./src/tetris-linux-arm64/* ./out/tetris
 

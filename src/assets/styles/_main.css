@@ -1,6 +1,11 @@
 @font-face {
     font-family: Kanit-Regular;
-    src: url("../fonts/Kanit-Regular.ttf");
+    src: url("../font/Kanit/Kanit-Regular.ttf");
+}
+
+@font-face {
+    font-family: PixelifySans;
+    src: url("../font/PixelifySans/PixelifySans-VariableFont_wght.ttf");
 }
 
 * {

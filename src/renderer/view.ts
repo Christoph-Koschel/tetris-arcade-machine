@@ -11,6 +11,10 @@
 import playerController from "./playerController";
 import {Group} from "./group";
 
+/**
+ * Base class for creating Views
+ * @class
+ */
 export abstract class View {
     public static views: Map<string, View> = new Map<string, View>();
     private static currentView: View = null;
@@ -28,8 +32,10 @@ export abstract class View {
     public static load(name: string): void {
         let view: View = this.views.get(name);
         if (!view) {
+            console.warn(`View '${name}' don't exist`);
             return;
         }
+        playerController.unselect();
 
         if (!!this.currentView) {
             this.currentView.onDestroy();

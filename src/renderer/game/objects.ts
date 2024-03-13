@@ -13,6 +13,7 @@ import {Cube, Render, Sprite} from "./rendering";
 import {CELL_COUNT_X, CELL_COUNT_Y} from "./constants";
 import spriteManager from "./spriteManager";
 import * as path from "path";
+import {getRandomSprite} from "../game";
 
 /**
  * Represents the definition of all possible shapes for GameObjects in the game.
@@ -65,6 +66,8 @@ export abstract class GameObject {
      */
     protected rotationIndex: RotationIndex;
 
+    private _: VirtualPoint;
+
     protected constructor(_: VirtualPoint) {
         this.mainShape = null;
         this.shapes = [];
@@ -81,6 +84,7 @@ export abstract class GameObject {
     public drawOffGrid(ctx: Render, cords: VirtualPoint): void {
         this.shapes.forEach(s => {
             let fake: Cube = new Cube(s.cords.calc(cords.vx, cords.vy));
+            fake.setSprite(this.shapes[0].getSprite());
             fake.setColor(this.shapes[0].getColor());
             fake.draw(ctx);
         });
@@ -121,6 +125,18 @@ export abstract class GameObject {
      */
     public right(): void {
         this.shapes.forEach(s => s.x = s.x + 1);
+    }
+
+    public getEachHorizontal(): Cube[] {
+        let cubes: Cube[] = [];
+
+        this.shapes.forEach(s => {
+            if (!cubes.find(r => r.x == s.x)) {
+                cubes.push(s);
+            }
+        });
+
+        return cubes.sort((a, b) => a.x < b.x ? -1 : 1);
     }
 
     /**
@@ -341,7 +357,7 @@ export class Box extends GameObject {
         );
 
         this.setColor("#ffff00");
-        this.setSprite(randomBoxSprite());
+        this.setSprite(getRandomSprite() ? randomBoxSprite() : spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite.YELLOW)));
     }
 
     rotate(): void {
@@ -369,7 +385,7 @@ export class TBox extends GameObject {
         this.mainShape = this.shapes[1];
 
         this.setColor("#9900ff");
-        this.setSprite(randomBoxSprite());
+        this.setSprite(getRandomSprite() ? randomBoxSprite() : spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite.PINK)));
     }
 
     public rotate(): void {
@@ -463,7 +479,7 @@ export class ZBox extends GameObject {
         this.mainShape = this.shapes[2];
 
         this.setColor("#ff0000");
-        this.setSprite(randomBoxSprite());
+        this.setSprite(getRandomSprite() ? randomBoxSprite() : spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite.RED)));
     }
 
     public rotate(): void {
@@ -560,7 +576,7 @@ export class RZBox extends GameObject {
         this.mainShape = this.shapes[2];
 
         this.setColor("#00ff00");
-        this.setSprite(randomBoxSprite());
+        this.setSprite(getRandomSprite() ? randomBoxSprite() : spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite.GREEN)));
     }
 
     public rotate(): void {
@@ -650,7 +666,7 @@ export class LBox extends GameObject {
         this.mainShape = this.shapes[1];
 
         this.setColor("#ffaa00");
-        this.setSprite(randomBoxSprite());
+        this.setSprite(getRandomSprite() ? randomBoxSprite() : spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite.ORANGE)));
     }
 
     public rotate(): void {
@@ -740,7 +756,7 @@ export class RLBox extends GameObject {
         this.mainShape = this.shapes[2];
 
         this.setColor("#0000ff");
-        this.setSprite(randomBoxSprite());
+        this.setSprite(getRandomSprite() ? randomBoxSprite() : spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite.DARKBLUE)));
     }
 
     public rotate(): void {
@@ -830,7 +846,7 @@ export class LineBox extends GameObject {
         this.mainShape = this.shapes[1];
 
         this.setColor("#00ffff");
-        this.setSprite(randomBoxSprite());
+        this.setSprite(getRandomSprite() ? randomBoxSprite() : spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite.BLUE)));
     }
 
     public rotate(): void {
@@ -913,7 +929,10 @@ export class LineBox extends GameObject {
 }
 
 function randomBoxSprite(): HTMLImageElement {
-    const index: number = Math.floor(Math.random() * (Object.keys(Sprite).length));
+    let index: number;
+    do {
+        index = Math.floor(Math.random() * (Object.keys(Sprite).length));
+    } while (Sprite[Object.keys(Sprite)[index]] == Sprite.GRAY)
     return spriteManager.get(path.join(__dirname, "assets", "sprites", Sprite[Object.keys(Sprite)[index]]));
 }
 

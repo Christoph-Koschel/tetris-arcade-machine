@@ -12,12 +12,13 @@
     top: 0;
     left: 0;
     display: flex;
+    gap: 1rem;
     flex-direction: column;
-    gap: 40rem;
     padding: 300px 0 0 3rem;
 }
 
 #pre-single-player .panel .row {
+    margin-top: 35rem;;
     display: flex;
     flex-direction: row;
     gap: 1rem;

@@ -8,26 +8,21 @@
  * You should have received a copy of the MIT license
  * along with this file. If not, please visit https://github.com/Christoph-Koschel/tetris-arcade-machine.
  */
-import {Keyboard, KeyBoardConPress} from "../driver/keyboard";
-import Keymap from "../driver/keymap";
-import controller, {ControllerClick, ControllerSelect, ControllerUnSelect} from "./playerController";
-import {View} from "./view";
 import * as fs from "fs";
 import * as path from "path";
-import sound from "./sound";
 
-
-import "./views/mainMenu";
-import "./views/preSinglePlayer";
-import "./views/singlePlayer";
+import {Keyboard, GameInterrupts} from "../driver/keyboard";
+import Keymap from "../driver/keymap";
+import {Serial} from "../driver/serial";
+import {View} from "./view";
 import {Sprite} from "./game/rendering";
+import controller from "./playerController";
 import spriteManager from "./game/spriteManager";
 
-window.addEventListener("load", () => {
-    load();
-});
+import "./views";
 
-async function load(): Promise<void> {
+window.addEventListener("load", async (): Promise<void> => {
+    // region Some debug stuff
     const pre: HTMLPreElement = document.createElement("pre");
     const code: HTMLElement = document.createElement("code");
     pre.style.color = "white";
@@ -37,39 +32,33 @@ async function load(): Promise<void> {
     const write = (text: string): void => {
         code.innerHTML += text + "\n";
     }
+    // endregion
 
     write("Load driver");
     const keyboard: Keyboard = new Keyboard();
+    const serial: Serial = new Serial();
     write("Init controller");
     Keymap.init(keyboard);
-    console.log(ControllerSelect.logicalName)
-    console.log(ControllerUnSelect.logicalName)
-    console.log(ControllerClick.logicalName)
-    Keymap.on(KeyBoardConPress.KEY_D, () => {
-        console.log("Next");
+    Keymap.init(serial);
+    Keymap.on(GameInterrupts.P1_MOVE_RIGHT, () => {
         controller.next();
     });
-    Keymap.on(KeyBoardConPress.KEY_A, () => {
-        console.log("Previous");
+    Keymap.on(GameInterrupts.P1_MOVE_LEFT, () => {
         controller.previous();
     });
-    Keymap.on(KeyBoardConPress.KEY_S, () => {
-        console.log("Click");
+    Keymap.on(GameInterrupts.P1_FAST_DOWN, () => {
         controller.click();
     });
 
-    write("Load sound");
-    //sound.playSong("./assets/sfx/theme.mp3");
-
     write("Load sprites");
-    await Promise.all((<(keyof Sprite)[]>Object.keys(Sprite)).map(key => spriteManager.load(path.join(__dirname, "assets", "sprites", Sprite[key]))))
+    await Promise.all((<(keyof Sprite)[]>Object.keys(Sprite)).map(key => spriteManager.load(path.join(__dirname, "assets", "sprites", Sprite[key]))));
 
     write("Load views");
     View.views.forEach(view => view.onBuild());
 
     write("Load css");
     await Promise.all(fs.readdirSync(path.join(__dirname, "assets", "styles")).map(src => {
-        let link = document.createElement("link");
+        let link: HTMLLinkElement = document.createElement("link");
         link.href = path.join(__dirname, "assets", "styles", src);
         link.rel = "stylesheet";
         return <Promise<void>>new Promise(resolve => {
@@ -80,7 +69,7 @@ async function load(): Promise<void> {
         });
     }));
 
+    // Loads the mainmenu
     View.load("mainMenu");
-    controller.setGroup("__main__");
-
-}
+    controller.setGroup("main");
+});

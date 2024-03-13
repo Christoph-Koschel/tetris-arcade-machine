@@ -1,0 +1,41 @@
+#win-board {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../background/background.png");
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#win-board > div > div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-direction: row;
+}
+
+#win-board > div > div:last-child {
+    flex-direction: row-reverse;
+}
+
+#win-board > div > div h1 {
+    font-size: 4rem;
+    font-family: PixelifySans;
+}
+
+#win-board > div > div table {
+    font-size: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+#win-board > div > div table td {
+    font-family: PixelifySans;
+}
+
+#win-board > div > div table td:first-of-type {
+    padding-right: 2rem;
+}

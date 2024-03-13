@@ -23,13 +23,14 @@ app.on("ready", () => {
     });
     win.setMenu(null);
     win.loadFile(path.join(__dirname, "index.html")).then(() => {
+
+        win.webContents.openDevTools({
+            mode: "right"
+        });
+
         if (!app.isPackaged) {
             const display = screen.getAllDisplays().filter(d => d.id != screen.getPrimaryDisplay().id)[0];
             win.setPosition(display.bounds.x, display.bounds.y);
-
-            win.webContents.openDevTools({
-                mode: "right"
-            });
             win.show();
         } else {
             win.show();
