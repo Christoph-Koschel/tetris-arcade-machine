@@ -10,7 +10,7 @@
 
 * {
     user-select: none;
-    /*cursor: none;*/
+    cursor: none;
     font-family: Kanit-Regular, "Segoe UI Variable", system-ui;
 }
 

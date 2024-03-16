@@ -23,17 +23,24 @@ app.on("ready", () => {
     });
     win.setMenu(null);
     win.loadFile(path.join(__dirname, "index.html")).then(() => {
-
-        win.webContents.openDevTools({
-            mode: "right"
-        });
-
+        // When app is not packaged (not running on the Raspberry PI), then the dev tools are also opened.
         if (!app.isPackaged) {
+            win.webContents.openDevTools({
+                mode: "right"
+            });
+
+            // Setting app to second display
             const display = screen.getAllDisplays().filter(d => d.id != screen.getPrimaryDisplay().id)[0];
             win.setPosition(display.bounds.x, display.bounds.y);
             win.show();
         } else {
             win.show();
         }
+        win.focus();
+        win.webContents.sendInputEvent({
+            type: "mouseMove",
+            y: 0,
+            x: 0
+        });
     });
 });

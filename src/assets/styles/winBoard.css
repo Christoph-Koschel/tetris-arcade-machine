@@ -5,6 +5,7 @@
     height: 100%;
     width: 100%;
     background-image: url("../background/background.png");
+    background-size: cover;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -38,4 +39,8 @@
 
 #win-board > div > div table td:first-of-type {
     padding-right: 2rem;
+}
+
+#win-board > div > div table td:last-of-type {
+    padding-left: 2rem;
 }

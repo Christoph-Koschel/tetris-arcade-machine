@@ -3,6 +3,7 @@
 SCRIPT_DIR=$(dirname $0)
 
 echo "Overwrite autostart"
+sudo cp "$SCRIPT_DIR/unclutter.desktop" /etc/xdg/autostart/unclutter.desktop
 sudo cp "$SCRIPT_DIR/tetris.desktop" /etc/xdg/autostart/tetris.desktop
 
 echo "Overwrite desktop config"

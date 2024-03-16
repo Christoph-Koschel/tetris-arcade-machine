@@ -10,6 +10,10 @@
  */
 import {DriverCon} from "./keymap";
 
+/**
+ * All existing interrupts code. The same are used on the Raspberry PI.
+ * @enum
+ */
 export enum GameInterrupts {
     P1_MOVE_LEFT = 0b1,
     P1_SMOOTH_DOWN = 0b10,
@@ -23,6 +27,10 @@ export enum GameInterrupts {
     P2_FAST_DOWN = 0b1000000000,
 }
 
+/**
+ * Keyboard Interface for sending Interrupt codes using a standard HID Keyboard.
+ * @class
+ */
 export class Keyboard implements DriverCon<GameInterrupts> {
     private cb: (id: GameInterrupts) => void;
 

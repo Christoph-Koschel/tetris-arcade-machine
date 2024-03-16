@@ -72,4 +72,5 @@ window.addEventListener("load", async (): Promise<void> => {
     // Loads the mainmenu
     View.load("mainMenu");
     controller.setGroup("main");
+    window.document.body.click();
 });

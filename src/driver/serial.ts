@@ -12,6 +12,10 @@ import {SerialPort} from "serialport";
 import {DriverCon} from "./keymap";
 import {GameInterrupts} from "./keyboard";
 
+/**
+ * Serial Interface for reading Interrupts from a connected serial device.
+ * @class
+ */
 export class Serial implements DriverCon<GameInterrupts> {
     private comPort: SerialPort;
     private cb: (id: GameInterrupts) => void;
@@ -41,7 +45,6 @@ export class Serial implements DriverCon<GameInterrupts> {
     onSignal(cb: (id: GameInterrupts) => void): void {
         this.cb = cb;
     }
-
 }
 
 
