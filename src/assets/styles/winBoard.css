@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2024 Christoph Koschel - All Rights Reserved
+ *
+ * You may use, distribute, and modify this code under the
+ * terms of the MIT license, which can be found
+ * in the accompanying LICENSE.txt.
+ *
+ * You should have received a copy of the MIT license
+ * along with this file. If not, please visit https://github.com/Christoph-Koschel/tetris-arcade-machine.
+ */
 #win-board {
     position: absolute;
     top: 0;
